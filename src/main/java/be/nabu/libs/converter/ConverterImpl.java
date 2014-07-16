@@ -19,6 +19,9 @@ public class ConverterImpl implements Converter {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T convert(Object instance, Class<T> targetClass) {
+		if (instance == null) {
+			return null;
+		}
 		Pair<Class<?>, Class<?>> pair = new Pair<Class<?>, Class<?>>(instance.getClass(), targetClass);
 		if (!providers.containsKey(pair))
 			providers.put(pair, findBestProvider(pair.getFirst(), pair.getSecond()));
