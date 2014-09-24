@@ -23,6 +23,9 @@ public class ConverterImpl implements Converter {
 		if (instance == null) {
 			return null;
 		}
+		else if (instance.getClass().equals(targetClass)) {
+			return (T) instance;
+		}
 		Pair<Class<?>, Class<?>> pair = new Pair<Class<?>, Class<?>>(instance.getClass(), targetClass);
 		if (!providers.containsKey(pair))
 			providers.put(pair, findBestProvider(pair.getFirst(), pair.getSecond()));
