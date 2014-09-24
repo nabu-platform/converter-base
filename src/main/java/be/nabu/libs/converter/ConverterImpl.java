@@ -8,6 +8,7 @@ import java.util.Set;
 
 import be.nabu.libs.converter.api.Converter;
 import be.nabu.libs.converter.api.ConverterProvider;
+import be.nabu.libs.converter.providers.StringToEnum;
 
 public class ConverterImpl implements Converter {
 
@@ -38,6 +39,10 @@ public class ConverterImpl implements Converter {
 				if (current == null || current.getSourceClass().isAssignableFrom(provider.getSourceClass()))
 					current = provider;
 			}
+		}
+		// if no provider was found AND the from is string AND the to is an enum, we have a dynamic transformation
+		if (current == null && String.class.isAssignableFrom(from) && Enum.class.isAssignableFrom(to)) {
+			current = new StringToEnum(to);
 		}
 		return current;
 	}

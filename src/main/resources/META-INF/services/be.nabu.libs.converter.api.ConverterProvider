@@ -18,3 +18,6 @@ be.nabu.libs.converter.providers.StringToURI
 be.nabu.libs.converter.providers.URIToString
 be.nabu.libs.converter.providers.TimeZoneToString
 be.nabu.libs.converter.providers.StringToTimeZone
+be.nabu.libs.converter.providers.EnumToString
+be.nabu.libs.converter.providers.UUIDToString
+be.nabu.libs.converter.providers.StringToUUID
