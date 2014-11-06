@@ -3,7 +3,7 @@
 	<implementation class="be.nabu.libs.converter.ConverterImpl" />
 
 	<service>
-		<provide interface="be.nabu.libs.converter.Converter" />
+		<provide interface="be.nabu.libs.converter.api.Converter" />
 	</service>
 	
 	<reference name="ConverterImpl"
@@ -11,6 +11,6 @@
 		bind="addProvider"
 		unbind="removeProvider"
 		cardinality="0..n"
-		policy="static"/>
+		policy="dynamic"/>
 		
 </scr:component>

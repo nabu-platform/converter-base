@@ -3,7 +3,7 @@
 	<implementation class="be.nabu.libs.converter.providers.NumberToString" />
 
 	<service>
-		<provide interface="be.nabu.libs.converter.ConverterProvider" />
+		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />
 	</service>
 
 </scr:component>

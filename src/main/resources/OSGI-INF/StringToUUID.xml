@@ -1,0 +1,9 @@
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.providers.StringToUUID">
+	
+	<implementation class="be.nabu.libs.converter.providers.StringToUUID" />
+
+	<service>
+		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />
+	</service>
+
+</scr:component>
