@@ -1,6 +1,6 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.ConverterImpl">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.ConverterImpl">
 	
-	<implementation class="be.nabu.libs.converter.ConverterImpl" />
+	<implementation class="be.nabu.libs.converter.base.ConverterImpl" />
 
 	<service>
 		<provide interface="be.nabu.libs.converter.api.Converter" />

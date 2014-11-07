@@ -1,6 +1,6 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.providers.StringToShort">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.providers.StringToShort">
 	
-	<implementation class="be.nabu.libs.converter.providers.StringToShort" />
+	<implementation class="be.nabu.libs.converter.base.providers.StringToShort" />
 
 	<service>
 		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />

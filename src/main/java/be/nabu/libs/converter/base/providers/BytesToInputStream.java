@@ -1,4 +1,4 @@
-package be.nabu.libs.converter.providers;
+package be.nabu.libs.converter.base.providers;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

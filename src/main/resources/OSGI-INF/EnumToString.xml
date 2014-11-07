@@ -1,6 +1,6 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.providers.EnumToString">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.providers.EnumToString">
 	
-	<implementation class="be.nabu.libs.converter.providers.EnumToString" />
+	<implementation class="be.nabu.libs.converter.base.providers.EnumToString" />
 
 	<service>
 		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />

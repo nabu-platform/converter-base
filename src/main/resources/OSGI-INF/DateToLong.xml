@@ -1,6 +1,6 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.providers.DateToLong">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.providers.DateToLong">
 	
-	<implementation class="be.nabu.libs.converter.providers.DateToLong" />
+	<implementation class="be.nabu.libs.converter.base.providers.DateToLong" />
 
 	<service>
 		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />

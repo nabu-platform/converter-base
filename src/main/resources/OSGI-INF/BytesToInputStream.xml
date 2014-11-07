@@ -1,6 +1,6 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.providers.BytesToInputStream">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.providers.BytesToInputStream">
 	
-	<implementation class="be.nabu.libs.converter.providers.BytesToInputStream" />
+	<implementation class="be.nabu.libs.converter.base.providers.BytesToInputStream" />
 
 	<service>
 		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />

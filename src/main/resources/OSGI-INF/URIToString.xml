@@ -1,6 +1,6 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.providers.URIToString">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.providers.URIToString">
 	
-	<implementation class="be.nabu.libs.converter.providers.URIToString" />
+	<implementation class="be.nabu.libs.converter.base.providers.URIToString" />
 
 	<service>
 		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />

@@ -1,6 +1,6 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.providers.StringToDouble">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.providers.StringToDouble">
 	
-	<implementation class="be.nabu.libs.converter.providers.StringToDouble" />
+	<implementation class="be.nabu.libs.converter.base.providers.StringToDouble" />
 
 	<service>
 		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />

@@ -1,4 +1,4 @@
-package be.nabu.libs.converter;
+package be.nabu.libs.converter.base;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 import be.nabu.libs.converter.api.Converter;
 import be.nabu.libs.converter.api.ConverterProvider;
-import be.nabu.libs.converter.providers.StringToEnum;
+import be.nabu.libs.converter.base.providers.StringToEnum;
 
 public class ConverterImpl implements Converter {
 
