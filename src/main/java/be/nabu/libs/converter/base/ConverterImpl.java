@@ -1,5 +1,8 @@
 package be.nabu.libs.converter.base;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -50,11 +53,36 @@ public class ConverterImpl implements Converter {
 		return current;
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void findProviders() {
-		ServiceLoader<ConverterProvider> serviceLoader = ServiceLoader.load(ConverterProvider.class);
-		for (ConverterProvider provider : serviceLoader)
-			availableProviders.add(provider);
+		try {
+			// let's try this with custom service loading based on a configuration
+			Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass("be.nabu.utils.services.ServiceLoader");
+			Method declaredMethod = clazz.getDeclaredMethod("load", Class.class);
+			availableProviders.addAll((Collection<? extends ConverterProvider<?, ?>>) declaredMethod.invoke(null, ConverterProvider.class));
+		}
+		catch (ClassNotFoundException e) {
+			// ignore, the framework is not present
+		}
+		catch (NoSuchMethodException e) {
+			// corrupt framework?
+			throw new RuntimeException(e);
+		}
+		catch (SecurityException e) {
+			throw new RuntimeException(e);
+		}
+		catch (IllegalAccessException e) {
+			// ignore
+		}
+		catch (InvocationTargetException e) {
+			// ignore
+		}
+		// only use SPI as a final fallback
+		if (availableProviders.isEmpty()) {
+			ServiceLoader<ConverterProvider> serviceLoader = ServiceLoader.load(ConverterProvider.class);
+			for (ConverterProvider provider : serviceLoader)
+				availableProviders.add(provider);
+		}
 	}
 	
 	public void addProvider(ConverterProvider<?, ?> provider) {
