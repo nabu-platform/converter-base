@@ -21,3 +21,5 @@ be.nabu.libs.converter.base.providers.StringToTimeZone
 be.nabu.libs.converter.base.providers.EnumToString
 be.nabu.libs.converter.base.providers.UUIDToString
 be.nabu.libs.converter.base.providers.StringToUUID
+be.nabu.libs.converter.base.providers.StringToBytes
+be.nabu.libs.converter.base.providers.StringToInputStream

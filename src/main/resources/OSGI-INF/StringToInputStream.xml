@@ -1,0 +1,9 @@
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="be.nabu.libs.converter.base.providers.StringToInputStream">
+	
+	<implementation class="be.nabu.libs.converter.base.providers.StringToInputStream" />
+
+	<service>
+		<provide interface="be.nabu.libs.converter.api.ConverterProvider" />
+	</service>
+
+</scr:component>
