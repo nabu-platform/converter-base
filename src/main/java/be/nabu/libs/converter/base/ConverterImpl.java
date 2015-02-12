@@ -11,6 +11,7 @@ import java.util.Set;
 
 import be.nabu.libs.converter.api.Converter;
 import be.nabu.libs.converter.api.ConverterProvider;
+import be.nabu.libs.converter.base.providers.ObjectToArrayConverter;
 import be.nabu.libs.converter.base.providers.StringToEnum;
 
 public class ConverterImpl implements Converter {
@@ -49,6 +50,15 @@ public class ConverterImpl implements Converter {
 		// if no provider was found AND the from is string AND the to is an enum, we have a dynamic transformation
 		if (current == null && String.class.isAssignableFrom(from) && Enum.class.isAssignableFrom(to)) {
 			current = new StringToEnum(to);
+		}
+		// otherwise, if we did not find a provider and the target is an array, check if we can convert to the component type
+		if (current == null && to.isArray()) {
+			ConverterProvider singleProvider = from.isArray() 
+				? findBestProvider(from.getComponentType(), to.getComponentType()) 
+				: findBestProvider(from, to.getComponentType());
+			if (singleProvider != null) {
+				current = new ObjectToArrayConverter(singleProvider);
+			}
 		}
 		return current;
 	}
