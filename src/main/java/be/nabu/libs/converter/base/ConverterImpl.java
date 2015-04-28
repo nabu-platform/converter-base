@@ -2,6 +2,7 @@ package be.nabu.libs.converter.base;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,13 +39,16 @@ public class ConverterImpl implements Converter {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private ConverterProvider findBestProvider(Class<?> from, Class<?> to) {
-		if (availableProviders.isEmpty())
+		if (availableProviders.isEmpty()) {
 			findProviders();
+		}
 		ConverterProvider current = null;
-		for (ConverterProvider<?, ?> provider : availableProviders) {
+		// wrap it in a new collection to prevent concurrent modification
+		for (ConverterProvider<?, ?> provider : new ArrayList<ConverterProvider<?, ?>>(availableProviders)) {
 			if (provider.getSourceClass().isAssignableFrom(from) && provider.getTargetClass().equals(to)) {
-				if (current == null || current.getSourceClass().isAssignableFrom(provider.getSourceClass()))
+				if (current == null || current.getSourceClass().isAssignableFrom(provider.getSourceClass())) {
 					current = provider;
+				}
 			}
 		}
 		// if no provider was found AND the from is string AND the to is an enum, we have a dynamic transformation
@@ -69,7 +73,9 @@ public class ConverterImpl implements Converter {
 			// let's try this with custom service loading based on a configuration
 			Class<?> clazz = getClass().getClassLoader().loadClass("be.nabu.utils.services.ServiceLoader");
 			Method declaredMethod = clazz.getDeclaredMethod("load", Class.class);
-			availableProviders.addAll((Collection<? extends ConverterProvider<?, ?>>) declaredMethod.invoke(null, ConverterProvider.class));
+			synchronized(availableProviders) {
+				availableProviders.addAll((Collection<? extends ConverterProvider<?, ?>>) declaredMethod.invoke(null, ConverterProvider.class));
+			}
 		}
 		catch (ClassNotFoundException e) {
 			// ignore, the framework is not present
@@ -90,19 +96,26 @@ public class ConverterImpl implements Converter {
 		// only use SPI as a final fallback
 		if (availableProviders.isEmpty()) {
 			ServiceLoader<ConverterProvider> serviceLoader = ServiceLoader.load(ConverterProvider.class);
-			for (ConverterProvider provider : serviceLoader)
-				availableProviders.add(provider);
+			synchronized(availableProviders) {
+				for (ConverterProvider provider : serviceLoader) {
+					availableProviders.add(provider);
+				}
+			}
 		}
 	}
 	
 	public void addProvider(ConverterProvider<?, ?> provider) {
-		availableProviders.add(provider);
+		synchronized(availableProviders) {
+			availableProviders.add(provider);
+		}
 		// clear the currently mapped providers so the optimal ones are recalculated 
 		providers.clear();
 	}
 	
 	public void removeProvider(ConverterProvider<?, ?> provider) {
-		availableProviders.remove(provider);
+		synchronized(availableProviders) {
+			availableProviders.remove(provider);
+		}
 	}
 	
 	private static class Pair<S, T> {
