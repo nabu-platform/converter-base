@@ -32,8 +32,9 @@ public class ConverterImpl implements Converter {
 			return (T) instance;
 		}
 		Pair<Class<?>, Class<?>> pair = new Pair<Class<?>, Class<?>>(instance.getClass(), targetClass);
-		if (!providers.containsKey(pair))
+		if (!providers.containsKey(pair)) {
 			providers.put(pair, findBestProvider(pair.getFirst(), pair.getSecond()));
+		}
 		return providers.get(pair) == null ? null : (T) providers.get(pair).convert(instance);
 	}
 
@@ -69,36 +70,38 @@ public class ConverterImpl implements Converter {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void findProviders() {
-		try {
-			// let's try this with custom service loading based on a configuration
-			Class<?> clazz = getClass().getClassLoader().loadClass("be.nabu.utils.services.ServiceLoader");
-			Method declaredMethod = clazz.getDeclaredMethod("load", Class.class);
-			synchronized(availableProviders) {
-				availableProviders.addAll((Collection<? extends ConverterProvider<?, ?>>) declaredMethod.invoke(null, ConverterProvider.class));
-			}
-		}
-		catch (ClassNotFoundException e) {
-			// ignore, the framework is not present
-		}
-		catch (NoSuchMethodException e) {
-			// corrupt framework?
-			throw new RuntimeException(e);
-		}
-		catch (SecurityException e) {
-			throw new RuntimeException(e);
-		}
-		catch (IllegalAccessException e) {
-			// ignore
-		}
-		catch (InvocationTargetException e) {
-			// ignore
-		}
-		// only use SPI as a final fallback
 		if (availableProviders.isEmpty()) {
-			ServiceLoader<ConverterProvider> serviceLoader = ServiceLoader.load(ConverterProvider.class);
 			synchronized(availableProviders) {
-				for (ConverterProvider provider : serviceLoader) {
-					availableProviders.add(provider);
+				if (availableProviders.isEmpty()) {		
+					Set<ConverterProvider<?, ?>> availableProviders = new HashSet<ConverterProvider<?, ?>>();
+					try {
+						// let's try this with custom service loading based on a configuration
+						Class<?> clazz = getClass().getClassLoader().loadClass("be.nabu.utils.services.ServiceLoader");
+						Method declaredMethod = clazz.getDeclaredMethod("load", Class.class);
+						availableProviders.addAll((Collection<? extends ConverterProvider<?, ?>>) declaredMethod.invoke(null, ConverterProvider.class));
+					}
+					catch (ClassNotFoundException e) {
+						// ignore, the framework is not present
+					}
+					catch (NoSuchMethodException e) {
+						// corrupt framework?
+						throw new RuntimeException(e);
+					}
+					catch (SecurityException e) {
+						throw new RuntimeException(e);
+					}
+					catch (IllegalAccessException e) {
+						// ignore
+					}
+					catch (InvocationTargetException e) {
+						// ignore
+					}
+					// only use SPI as a final fallback
+					ServiceLoader<ConverterProvider> serviceLoader = ServiceLoader.load(ConverterProvider.class);
+					for (ConverterProvider provider : serviceLoader) {
+						availableProviders.add(provider);
+					}
+					this.availableProviders.addAll(availableProviders);
 				}
 			}
 		}
@@ -136,10 +139,11 @@ public class ConverterImpl implements Converter {
 		}
 
 		@Override
-		public boolean equals(Object instance) {
-			return instance instanceof Pair
-					&& ((Pair<?, ?>) instance).first.equals(first)
-					&& ((Pair<?, ?>) instance).second.equals(second);
+		public int hashCode() {
+			int result = 1;
+			result = 31 * result + ((first == null) ? 0 : first.hashCode());
+			result = 31 * result + ((second == null) ? 0 : second.hashCode());
+			return result;
 		}
 	}
 
