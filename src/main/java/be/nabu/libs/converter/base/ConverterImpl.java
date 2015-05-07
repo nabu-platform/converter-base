@@ -145,6 +145,13 @@ public class ConverterImpl implements Converter {
 			result = 31 * result + ((second == null) ? 0 : second.hashCode());
 			return result;
 		}
+		
+		@Override
+		public boolean equals(Object object) {
+			return object instanceof Pair
+				&& ((Pair<?, ?>) object).first.equals(first)
+				&& ((Pair<?, ?>) object).second.equals(second);
+		}
 	}
 
 	@Override
