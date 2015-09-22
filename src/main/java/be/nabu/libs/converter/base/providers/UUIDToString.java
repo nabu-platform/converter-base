@@ -8,7 +8,7 @@ public class UUIDToString implements ConverterProvider<UUID, String> {
 
 	@Override
 	public String convert(UUID arg0) {
-		return arg0 == null ? null : arg0.toString();
+		return arg0 == null ? null : arg0.toString().replace("-", "");
 	}
 
 	@Override

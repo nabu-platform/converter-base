@@ -8,6 +8,10 @@ public class StringToUUID implements ConverterProvider<String, UUID> {
 
 	@Override
 	public UUID convert(String arg0) {
+		// an unformatted UUID, add formatting to enable parsing
+		if (arg0 != null && arg0.indexOf('-') < 0) {
+			arg0 = arg0.substring(0, 8) + "-" + arg0.substring(8, 12) + "-" + arg0.substring(12, 16) + "-" + arg0.substring(16, 20) + "-" + arg0.substring(20);
+		}
 		return arg0 == null ? null : UUID.fromString(arg0);
 	}
 
