@@ -23,3 +23,7 @@ be.nabu.libs.converter.base.providers.UUIDToString
 be.nabu.libs.converter.base.providers.StringToUUID
 be.nabu.libs.converter.base.providers.StringToBytes
 be.nabu.libs.converter.base.providers.StringToInputStream
+be.nabu.libs.converter.base.providers.BigDecimalToBigInteger
+be.nabu.libs.converter.base.providers.BigIntegerToBigDecimal
+be.nabu.libs.converter.base.providers.NumberToBigDecimal
+be.nabu.libs.converter.base.providers.NumberToBigInteger
