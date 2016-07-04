@@ -27,3 +27,4 @@ be.nabu.libs.converter.base.providers.BigDecimalToBigInteger
 be.nabu.libs.converter.base.providers.BigIntegerToBigDecimal
 be.nabu.libs.converter.base.providers.NumberToBigDecimal
 be.nabu.libs.converter.base.providers.NumberToBigInteger
+be.nabu.libs.converter.base.providers.BytesToString
