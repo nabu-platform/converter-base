@@ -1,10 +1,16 @@
 be.nabu.libs.converter.base.providers.BooleanToString
+be.nabu.libs.converter.base.providers.BooleanToInteger
+be.nabu.libs.converter.base.providers.BooleanToLong
+be.nabu.libs.converter.base.providers.BooleanToDouble
+be.nabu.libs.converter.base.providers.BooleanToFloat
+be.nabu.libs.converter.base.providers.BooleanToShort
 be.nabu.libs.converter.base.providers.BytesToInputStream
 be.nabu.libs.converter.base.providers.DateToLong
 be.nabu.libs.converter.base.providers.DateToSQLDate
 be.nabu.libs.converter.base.providers.DateToSQLTime
 be.nabu.libs.converter.base.providers.DateToSQLTimestamp
 be.nabu.libs.converter.base.providers.LongToDate
+be.nabu.libs.converter.base.providers.NumberToBoolean
 be.nabu.libs.converter.base.providers.NumberToDouble
 be.nabu.libs.converter.base.providers.NumberToFloat
 be.nabu.libs.converter.base.providers.NumberToInteger
