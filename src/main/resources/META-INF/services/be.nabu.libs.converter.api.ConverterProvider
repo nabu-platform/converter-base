@@ -5,6 +5,8 @@ be.nabu.libs.converter.base.providers.BooleanToDouble
 be.nabu.libs.converter.base.providers.BooleanToFloat
 be.nabu.libs.converter.base.providers.BooleanToShort
 be.nabu.libs.converter.base.providers.BytesToInputStream
+be.nabu.libs.converter.base.providers.InputStreamToBytes
+be.nabu.libs.converter.base.providers.InputStreamToString
 be.nabu.libs.converter.base.providers.DateToLong
 be.nabu.libs.converter.base.providers.DateToSQLDate
 be.nabu.libs.converter.base.providers.DateToSQLTime
