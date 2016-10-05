@@ -1,4 +1,4 @@
-package be.nabu.libs.converter;
+package be.nabu.libs.converter.base;
 
 import java.util.Date;
 
