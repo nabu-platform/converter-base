@@ -22,7 +22,7 @@ public class ConverterImpl implements Converter {
 	@SuppressWarnings("rawtypes")
 	private Map<Pair<Class<?>, Class<?>>, ConverterProvider> providers = new HashMap<Pair<Class<?>, Class<?>>, ConverterProvider>();
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public <T> T convert(Object instance, Class<T> targetClass) {
 		if (instance == null) {
@@ -35,7 +35,8 @@ public class ConverterImpl implements Converter {
 		if (!providers.containsKey(pair)) {
 			providers.put(pair, findBestProvider(pair.getFirst(), pair.getSecond()));
 		}
-		return providers.get(pair) == null ? null : (T) providers.get(pair).convert(instance);
+		ConverterProvider converterProvider = providers.get(pair);
+		return converterProvider == null ? null : (T) converterProvider.convert(instance);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
