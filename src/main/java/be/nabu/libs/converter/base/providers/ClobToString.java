@@ -10,9 +10,6 @@ public class ClobToString implements ConverterProvider<Clob, String> {
 	@Override
 	public String convert(Clob instance) {
 		try {
-			if (instance != null) {
-				System.out.println("RECEIVED CLOB: " + instance.length() + ": " + instance.getSubString(1,  (int) instance.length()));
-			}
 			return instance == null ? null : instance.getSubString(1, (int) instance.length());
 		}
 		catch (SQLException e) {
