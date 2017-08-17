@@ -6,7 +6,15 @@ public class StringToBoolean implements ConverterProvider<String, Boolean> {
 
 	@Override
 	public Boolean convert(String instance) {
-		return instance == null ? null : new Boolean(instance);
+		if (instance == null) {
+			return null;
+		}
+		else if (instance.matches("[0-9]+")) {
+			return Integer.parseInt(instance) >= 1;
+		}
+		else {
+			return Boolean.parseBoolean(instance);
+		}
 	}
 
 	@Override
