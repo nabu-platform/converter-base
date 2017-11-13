@@ -6,7 +6,7 @@ public class StringToDouble implements ConverterProvider<String, Double> {
 
 	@Override
 	public Double convert(String instance) {
-		return instance == null ? null : new Double(instance);
+		return instance == null || instance.trim().isEmpty() ? null : new Double(instance);
 	}
 
 	@Override

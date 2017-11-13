@@ -8,7 +8,7 @@ public class StringToTimeZone implements ConverterProvider<String, TimeZone> {
 
 	@Override
 	public TimeZone convert(String instance) {
-		return instance == null ? null : TimeZone.getTimeZone(instance);
+		return instance == null || instance.trim().isEmpty() ? null : TimeZone.getTimeZone(instance);
 	}
 
 	@Override

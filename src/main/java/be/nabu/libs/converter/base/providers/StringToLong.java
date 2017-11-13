@@ -6,7 +6,7 @@ public class StringToLong implements ConverterProvider<String, Long> {
 
 	@Override
 	public Long convert(String instance) {
-		return instance == null ? null : new Long(instance);
+		return instance == null || instance.trim().isEmpty() ? null : new Long(instance);
 	}
 
 	@Override

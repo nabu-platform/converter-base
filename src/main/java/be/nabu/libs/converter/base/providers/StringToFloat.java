@@ -6,7 +6,7 @@ public class StringToFloat implements ConverterProvider<String, Float> {
 
 	@Override
 	public Float convert(String instance) {
-		return instance == null ? null : new Float(instance);
+		return instance == null || instance.trim().isEmpty() ? null : new Float(instance);
 	}
 
 	@Override

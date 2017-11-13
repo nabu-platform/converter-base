@@ -12,7 +12,7 @@ public class StringToEnum<E extends Enum<E>> implements ConverterProvider<String
 
 	@Override
 	public E convert(String name) {
-		return name == null ? null : Enum.valueOf(enumClass, name);
+		return name == null || name.trim().isEmpty() ? null : Enum.valueOf(enumClass, name);
 	}
 
 	@Override

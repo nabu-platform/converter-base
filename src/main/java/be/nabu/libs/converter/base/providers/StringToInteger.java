@@ -6,7 +6,7 @@ public class StringToInteger implements ConverterProvider<String, Integer> {
 
 	@Override
 	public Integer convert(String instance) {
-		return instance == null ? null : new Integer(instance);
+		return instance == null || instance.trim().isEmpty() ? null : new Integer(instance);
 	}
 
 	@Override
