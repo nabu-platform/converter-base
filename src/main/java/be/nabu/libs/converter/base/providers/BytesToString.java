@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 
 import be.nabu.libs.converter.api.ConverterProvider;
 
+// not in line with Bytes type (check comment in stringtobytes
 public class BytesToString implements ConverterProvider<byte[], String> {
 
 	@Override
